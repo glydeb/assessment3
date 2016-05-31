@@ -45,27 +45,42 @@ myApp.controller('HomeController', ['$scope', '$http', function ($scope, $http) 
   }
 
   $scope.saveFave = function ()  {
-    // check for photo
-    var data = {
-      id: $scope.animal.id.$t,
-      name: $scope.animal.name.$t,
-      animalType: $scope.animal.animal.$t
-    };
 
-    if ($scope.photos[1] !== undefined) {
-      data.photoURL = $scope.photos[1].$t;
+    // check for duplicate id
+    var found = false;
+    var existing = $scope.faves;
+    existing.forEach(function (fave) {
+      console.log(fave.id);
+      if (fave.id == $scope.animal.id.$t) {
+        found = true;
+      }
+    });
+
+    if (found) {
+      alert('That animal is already one of your favorites!');
+    } else {
+      var data = {
+        id: $scope.animal.id.$t,
+        name: $scope.animal.name.$t,
+        animalType: $scope.animal.animal.$t
+      };
+
+      // check for photo
+      if ($scope.photos[1] !== undefined) {
+        data.photoURL = $scope.photos[1].$t;
+      }
+
+      if ($scope.animal.description.$t !== undefined) {
+        data.description = $scope.animal.description.$t.substr(0, 100);
+      }
+
+      $http.post('/pets', data)
+        .then(function () {
+          console.log('POST /pets');
+          getFaves();
+
+        });
     }
-
-    if ($scope.animal.description.$t !== undefined) {
-      data.description = $scope.animal.description.$t.substr(0, 100);
-    }
-
-    $http.post('/pets', data)
-      .then(function () {
-        console.log('POST /pets');
-        getFaves();
-
-      });
   };
 
 }]);

@@ -1,6 +1,6 @@
 <div class="container">
   <p>Favorites saved: {{faves.length}}</p>
-  <div ng-repeat="animal in faves | orderBy: animal.animalType" class="fave">
+  <div ng-repeat="animal in faves | orderBy: 'animalType'" class="fave">
     <h2>{{animal.name}}</h2>
     <p>
       <img ng-if="animal.photoURL" ng-src="{{animal.photoURL}}"
