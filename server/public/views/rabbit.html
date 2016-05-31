@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <h2>{{animal.name.$t}}</h2>
+    <p>{{animal.description.$t}}</p>
+    <p ng-repeat="photo in photos" ng-if="photo.size == 'x'">
+      <img ng-src="{{photo.$t}}"
+        alt="Image of this rabbit"/>
+    </p>
+  </div>
+</div>
