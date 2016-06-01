@@ -1,15 +1,22 @@
-myApp.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('HomeController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
 
+  $scope.dataFactory = DataFactory;
   var key = 'a13d573be80f54aaa3c5bfdfdf8bc460';
   var secret = '53d857e7ec5c210629b03750a5383d2d';
   var baseURL = 'http://api.petfinder.com/';
-  $scope.faves = [];
   $scope.animalTypes = ['barnyard', 'bird', 'cat', 'dog', 'horse', 'pig', 'reptile', 'smallfurry'];
 
-  getFaves();
-
-  // make default animal type a dog
+  // make default animal type a dog & initial count 0
   $scope.animalType = $scope.animalTypes[3];
+  $scope.faves = [];
+
+  if ($scope.dataFactory.factoryGetFaves() === undefined) {
+    $scope.dataFactory.factoryRefreshFaveData().then(function () {
+      $scope.faves = $scope.dataFactory.factoryGetFaves();
+    });
+  } else {
+    $scope.faves = $scope.dataFactory.factoryGetFaves();
+  }
 
   $scope.getRandomPet = function () {
     var query = 'pet.getRandom';
@@ -34,15 +41,6 @@ myApp.controller('HomeController', ['$scope', '$http', function ($scope, $http) 
       }
     );
   };
-
-  function getFaves() {
-    $http.get('/pets')
-      .then(function (response) {
-        if (response.data !== undefined) { $scope.faves = response.data; }
-
-        console.log('GET /pets ', response.data);
-      });
-  }
 
   $scope.saveFave = function ()  {
 
@@ -74,12 +72,10 @@ myApp.controller('HomeController', ['$scope', '$http', function ($scope, $http) 
         data.description = $scope.animal.description.$t.substr(0, 100);
       }
 
-      $http.post('/pets', data)
-        .then(function () {
-          console.log('POST /pets');
-          getFaves();
-
-        });
+      $scope.dataFactory.factorySaveFave(data).then(function () {
+        console.log('done saving');
+        $scope.faves = $scope.dataFactory.factoryGetFaves();
+      });
     }
   };
 

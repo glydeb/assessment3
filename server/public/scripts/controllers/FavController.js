@@ -1,21 +1,23 @@
-myApp.controller('FavController', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('FavController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
 
   $scope.faves = [];
-  getFaves();
+  $scope.dataFactory = DataFactory;
 
-  function getFaves() {
-    $http.get('/pets')
-      .then(function (response) {
-        if (response.data !== undefined) { $scope.faves = response.data; }
-
-        console.log('GET /pets ', response.data);
-      });
+  if ($scope.dataFactory.factoryGetFaves() === undefined) {
+    $scope.dataFactory.factoryRefreshFaveData().then(function () {
+      $scope.faves = $scope.dataFactory.factoryGetFaves();
+    });
+  } else {
+    $scope.faves = $scope.dataFactory.factoryGetFaves();
   }
+
   $scope.deleteFav = function (id) {
     $http.delete('/pets/' + id)
       .then(function (response) {
-        console.log('DELETE /movies ', id);
-        getFaves();
+        console.log('DELETE /pets ', id);
+        $scope.dataFactory.factoryRefreshFaveData().then(function () {
+          $scope.faves = $scope.dataFactory.factoryGetFaves();
+        });
       });
   };
 
