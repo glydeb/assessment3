@@ -3,13 +3,13 @@ var router = express.Router();
 var Hero = require('../models/heroes');
 
 router.get('/', function (req, res) {
-  Hero.find({}, function (err, movies) {
+  Hero.find({}, function (err, heroes) {
     if (err) {
       res.sendStatus(500);
       return;
     }
 
-    res.send(movies);
+    res.send(heroes);
   });
 });
 

@@ -2,38 +2,12 @@ myApp.factory('DataFactory', ['$http', function ($http) {
   console.log('dataFactory running');
 
   // PRIVATE
-  var favorites = undefined;
+  var powers = undefined;
 
-  function getFaveData() {
-    var promise = $http.get('/').then(function (response) {
+  function pullPowers() {
+    var promise = $http.get('/powers').then(function (response) {
       console.log('Async data returned: ', response.data);
-      favorites = response.data;
-    });
-
-    return promise;
-  }
-
-  function saveFave(newFav) {
-    var promise = $http.post('/pets', newFav).then(function (response) {
-      if (response.status == 201) {
-        console.log('Hooray! Fave Saved!');
-        return getFaveData();
-      } else {
-        console.log('Boo!', response.data);
-      }
-    });
-
-    return promise;
-  }
-
-  function deleteFave(id) {
-    var promise = $http.delete('/pets/' + id).then(function (response) {
-      if (response.status == 201) {
-        console.log('Hooray! Fave Saved!');
-        return getFaveData();
-      } else {
-        console.log('Boo!', response.data);
-      }
+      powers = response.data;
     });
 
     return promise;
@@ -41,17 +15,13 @@ myApp.factory('DataFactory', ['$http', function ($http) {
 
   // PUBLIC
   var publicApi = {
-    factorySaveFave: function (newFave) {
-      return saveFave(newFave);
+    factoryPullPowers: function () {
+      return pullPowers();
     },
 
-    factoryRefreshFaveData: function () {
-      return getFaveData();
-    },
-
-    factoryGetFaves: function () {
+    factoryGetPowerList: function () {
       // return our array
-      return favorites;
+      return powers;
     }
   };
 
