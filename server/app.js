@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 // modules
 var heroes = require('./routes/heroes');
+var powers = require('./routes/powers');
 var index = require('./routes/index');
 
 // serve static files
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 // express routes
 app.use('/heroes', heroes);
+app.use('/powers', powers);
 app.use('/', index);
 
 // mongoose connection

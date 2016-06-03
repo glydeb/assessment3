@@ -1,16 +1,14 @@
 myApp.controller('ListController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
 
   $scope.dataFactory = DataFactory;
-  $scope.refreshHeroes();
   $scope.filterPower_name = '';
 
-  if ($scope.dataFactory.factoryGetPowerList() === undefined) {
-    $scope.dataFactory.factoryPullPowers().then(function () {
-      $scope.powerList = $scope.dataFactory.factoryGetPowerList();
+  $scope.getPowers = function () {
+    $http.get('/powers').then(function (response) {
+      console.log('Async data returned: ', response.data);
+      $scope.powerList = response.data;
     });
-  } else {
-    $scope.powerList = $scope.dataFactory.factoryGetPowerList();
-  }
+  };
 
   $scope.refreshHeroes = function () {
     $http.get('/heroes').then(function (response) {
@@ -20,13 +18,14 @@ myApp.controller('ListController', ['$scope', '$http', 'DataFactory', function (
   };
 
   $scope.deleteFav = function (id) {
-    $http.delete('/pets/' + id)
+    $http.delete('/heroes/' + id)
       .then(function (response) {
-        console.log('DELETE /pets ', id);
-        $scope.dataFactory.factoryRefreshFaveData().then(function () {
-          $scope.faves = $scope.dataFactory.factoryGetFaves();
-        });
+        console.log('DELETE /heroes ', id);
+        $scope.refreshHeroes();
       });
   };
+
+  $scope.refreshHeroes();
+  $scope.getPowers();
 
 }]);

@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Power = require('../models/powers');
+var SuperPowers = require('../models/powers');
 
 router.get('/', function (req, res) {
-  Power.find({}, function (err, powers) {
+  SuperPowers.find({}, function (err, powers) {
     if (err) {
       res.sendStatus(500);
       return;

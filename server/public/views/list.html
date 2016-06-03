@@ -2,8 +2,8 @@
   <form>
     <label for="selectPower">Show only heroes with this superpower:</label>
     <select name="selectPower" ng-model="
-    filterPower_name" ng-options="power.type as
-      filterPower_name for power in powerList"></select>
+    filterPower_name" ng-options="power.power_name as
+      power.power_name for power in powerList"></select>
   </form>
   <table>
     <tr>
@@ -20,7 +20,7 @@
       <td>{{hero.last_name}}</td>
       <td>{{hero.city}}</td>
       <td>{{hero.power_name}}</td>
-      <td><button ng-click="deleteFav(hero._id)">Delete from favorites</button></td>
+      <td><button ng-click="deleteFav(hero._id)">Delete</button></td>
     <tr>
   </table>
 </div>

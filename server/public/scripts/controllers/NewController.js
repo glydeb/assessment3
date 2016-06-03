@@ -1,4 +1,4 @@
-myApp.controller('HomeController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
+myApp.controller('NewController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
 
   $scope.dataFactory = DataFactory;
   $scope.newHero = {};

@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   var hero = new Hero(req.body);
-  Hero.save(function (err) {
+  hero.save(function (err) {
     if (err) {
       res.sendStatus(500);
       return;

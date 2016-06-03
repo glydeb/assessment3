@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var PowerSchema = new Schema({
-  power_name: { type: String, required: true },
+var SuperPowerSchema = new Schema({
+  power_name: String
 });
 
-var Power = mongoose.model('Powers', PowerSchema);
+var SuperPower = mongoose.model('SuperPowers', SuperPowerSchema);
 
-module.exports = Hero;
+module.exports = SuperPower;

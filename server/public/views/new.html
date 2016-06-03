@@ -10,8 +10,7 @@
       <label for="city">City:</label>
       <input type="text" name="city" ng-model="newHero.city" /><br />
       <label for="selectPower">Superpower:</label>
-      <select name="selectPower" ng-model="newHero.power_name" ng-options="power.type as
-        newHero.power_name for power in powerList"></select>
+      <select name="selectPower" ng-model="newHero.power_name" ng-options="power.power_name as power.power_name for power in powerList"></select>
       <button ng-click="submitHero()">Save Hero</button>
     </form>
   </div>
