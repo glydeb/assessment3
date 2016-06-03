@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // modules
-var pets = require('./routes/pets');
+var heroes = require('./routes/heroes');
 var index = require('./routes/index');
 
 // serve static files
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // express routes
-app.use('/pets', pets);
+app.use('/heroes', heroes);
 app.use('/', index);
 
 // mongoose connection
@@ -33,7 +33,7 @@ mongoose.connection.on('error', function (err) {
 });
 
 // start server
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4242);
 app.listen(app.get('port'), function () {
   console.log('listening on port ', app.get('port'));
 });

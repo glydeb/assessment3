@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Pet = require('../models/pet');
+var Hero = require('../models/heroes');
 
 router.get('/', function (req, res) {
-  Pet.find({}, function (err, movies) {
+  Hero.find({}, function (err, movies) {
     if (err) {
       res.sendStatus(500);
       return;
@@ -14,8 +14,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-  var pet = new Pet(req.body);
-  pet.save(function (err) {
+  var hero = new Hero(req.body);
+  Hero.save(function (err) {
     if (err) {
       res.sendStatus(500);
       return;
@@ -26,7 +26,7 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-  Pet.findByIdAndRemove(req.params.id, function (err) {
+  Hero.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
       res.sendStatus(500);
       return;

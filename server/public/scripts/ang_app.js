@@ -2,15 +2,15 @@ var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
-    .when('/home', {
-      templateUrl: '/views/home.html',
-      controller: 'HomeController',
+    .when('/new', {
+      templateUrl: '/views/new.html',
+      controller: 'NewController',
     })
-    .when('/fav', {
-      templateUrl: '/views/fav.html',
-      controller: 'FavController',
+    .when('/list', {
+      templateUrl: '/views/list.html',
+      controller: 'ListController',
     })
     .otherwise({
-      redirectTo: 'home',
+      redirectTo: 'new',
     });
 }]);
