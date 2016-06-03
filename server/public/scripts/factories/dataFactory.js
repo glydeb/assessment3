@@ -5,7 +5,7 @@ myApp.factory('DataFactory', ['$http', function ($http) {
   var favorites = undefined;
 
   function getFaveData() {
-    var promise = $http.get('/pets').then(function (response) {
+    var promise = $http.get('/').then(function (response) {
       console.log('Async data returned: ', response.data);
       favorites = response.data;
     });

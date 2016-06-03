@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <form id="makeHero">
+      <label for="alias">Alias:</label>
+      <input type="text" name="alias" ng-model="newHero.alias" /><br />
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" ng-model="newHero.first_name" />
+      <label for="last_name">Last Name:</label>
+      <input type="text" name="last_name" ng-model="newHero.last_name" /><br />
+      <label for="city">City:</label>
+      <input type="text" name="city" ng-model="newHero.city" /><br />
+      <label for="selectPower">Superpower:</label>
+      <select name="selectPower" ng-model="newHero.power_name" ng-options="power.type as
+        newHero.power_name for power in powerList"></select>
+      <button ng-click="submitHero()">Save Hero</button>
+    </form>
+  </div>
+</div>

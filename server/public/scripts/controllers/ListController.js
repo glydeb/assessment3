@@ -1,4 +1,4 @@
-myApp.controller('FavController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
+myApp.controller('ListController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
 
   $scope.faves = [];
   $scope.dataFactory = DataFactory;

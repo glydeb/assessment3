@@ -1,0 +1,26 @@
+<div class="container">
+  <form>
+    <label for="selectPower">Show only heroes with this superpower:</label>
+    <select name="selectPower" ng-model="
+    filterPower_name" ng-options="power.type as
+      filterPower_name for power in powerList"></select>
+  </form>
+  <table>
+    <tr>
+      <th>Alias</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>City</th>
+      <th>Power</th>
+      <th></th>
+    </tr>
+    <tr ng-repeat="hero in heroes" ng-show="hero.power_name == filterPower_name || filterPower_name == ''" class="hero">
+      <td>{{hero.alias}}</td>
+      <td>{{hero.first_name}}</td>
+      <td>{{hero.last_name}}</td>
+      <td>{{hero.city}}</td>
+      <td>{{hero.power_name}}</td>
+      <td><button ng-click="deleteFav(hero._id)">Delete from favorites</button></td>
+    <tr>
+  </table>
+</div>
